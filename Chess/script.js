@@ -12,6 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (game.game_over()) {
             alert("Checkmate!");
+        } else {
+            const randomIdx = Math.floor(Math.random() * possibleMoves.length);
+            const move = possibleMoves[randomIdx];
+            game.move(move);
+            board.position(game.fen());
+            recordMove(move, moveCount);    // Record and display the move with move count
+            moveCount++;    // Increment the move count
         }
     }
+
+    // Function to record and display a move in the move history
+    const recordMove = (move, count) => {
+        const formattedMove = count % 2 === 1 ? `${Math.ceil(count / 2)}. ${move}` : `${move} -`;
+        moveHistory.textContent += formattedMove + ' ';
+        moveHistory.scrollTop = moveHistory.scrollHeight;   // Auto-scroll to the lastest move
+    }
+
+    
 })
