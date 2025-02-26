@@ -50,6 +50,58 @@ document.addEventListener('DOMContentLoaded', () => {
         moveCount++;
     }
 
-    //
+    // Function to handle the end of a piece snap animation
+    const onSnapEnd = () => {
+        board.position(game.fen());
+    }
+
+    // Configuration options for the chessboard
+    const boardConfig = {
+        showNotation: true,
+        draggable: true,
+        position: 'start',
+        onDragStart,
+        onDrop,
+        onSnapEnd,
+        moveSpeed: 'fast',
+        snapBackSpeed: 500,
+        snapSpeed: 100,
+    }
+
+    // Initialize the chessboard
+    board = Chessboard('board', boardConfig);
+
+    // Event listener for the "Play Again" button
+    document.querySelector('.btn-play_again').addEventListener('click', () => {
+        game.reset();
+        board.start();
+        moveHistory.textContent = '';
+        moveCount = 1;
+        userColor = 'w';
+    })
+
+    // Event listener for the "Set Position" button
+    document.querySelector('.btn-set_pos').addEventListener('click', () => {
+        const fen = prompt("Enter the FEN notation for the desired position!");
+        if (fen !== null) {
+            if (game.load(fen)) {
+                board.position(fen);
+                moveHistory.textContent = '';
+                moveCount = 1;
+                userColor = 'w';
+            } else {
+                alert("Invalid FEN notation. Please try again.");
+            }
+        }
+
+    })
+
+    // Event listener for the "Flip Board" button
+    document.querySelector('.btn-flip_board').addEventListener('click', () => {
+        board.flip();
+        makeRandomMove();
+        // Toggle user's color after flipping the board
+        userColor = userColor === 'w' ? 'b' : 'w';
+    })
 
 })
