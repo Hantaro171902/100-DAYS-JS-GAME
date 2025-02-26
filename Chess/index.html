@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/chessboard-1.0.0.min.css">
 </head>
 <body>
     <div class="container">
@@ -16,9 +17,15 @@
             <button class="btn-set_pos">Set Position</button>
             <button class="btn-flip_board">Flip Board</button>
         </div>
+
+        <div class="log" id="log"></div>
+
     </div>
-    <div class="log" id="log">history</div>
 
     <script src="script.js"></script>
+    <script src="./JS/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
 </body>
 </html>
