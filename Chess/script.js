@@ -29,5 +29,27 @@ document.addEventListener('DOMContentLoaded', () => {
         moveHistory.scrollTop = moveHistory.scrollHeight;   // Auto-scroll to the lastest move
     }
 
-    
+    // Function to handle the start of a drag position
+    const onDragStart = (source, piece) => {
+        // Allow the user to drag only their own pieces based on color
+        return !game.game_over() && piece.search(userColor) === 0;
+    }
+
+    //  Function to handle a piece drop on the board
+    const onDrop = (source, target) => {
+        const move = game.move({
+            from: source,
+            to: target,
+            promotion: 'q',
+        });
+
+        if (move === null) return 'snapback';
+
+        window.setTimeout(makeRandomMove, 250);
+        recordMove(move.san, moveCount);    // Record and display the move with move count
+        moveCount++;
+    }
+
+    //
+
 })
