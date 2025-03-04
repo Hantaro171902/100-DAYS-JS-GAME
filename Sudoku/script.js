@@ -36,7 +36,7 @@ function setGame() {
     for (let i=1; i<=9; i++) {
         // div id="1" class="number">1</div>
         let number = document.createElement("div");
-        number.id = 1;
+        number.id = i;
         number.innerText = i;
         number.addEventListener("click", selectNumber);
         number.classList.add("number");
@@ -45,7 +45,7 @@ function setGame() {
 
     // Board 9x9
     for (let r=0; r<9; r++){
-        for (let c=0; c<9; r++){
+        for (let c=0; c<9; c++){
             let tile = document.createElement("div");
             tile.id = r.toString() + "-" + c.toString();
             if (board[r][c] != "-") {
@@ -82,8 +82,8 @@ function selectTile() {
 
         // "0-0" "0-1" .. "3-1"
         let coords = this.id.split("-");    // ["0"-"0"]
-        let r = parseInt(coord[0]);
-        let c = parseInt(coord[1]);
+        let r = parseInt(coords[0]);
+        let c = parseInt(coords[1]);
         
         if (solution[r][c] == numSelected.id) {
             this.innerText = numSelected.id
